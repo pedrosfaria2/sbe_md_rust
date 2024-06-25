@@ -1,0 +1,10 @@
+[package]
+name = "sbe_b3__umdf_mbo_sbe"
+version = "0.1.0"
+authors = ["sbetool"]
+description = "B3 Market Data UMDF SBE messages"
+edition = "2021"
+
+[lib]
+name = "sbe_b3__umdf_mbo_sbe"
+path = "src/lib.rs"

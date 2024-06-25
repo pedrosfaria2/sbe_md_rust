@@ -1,10 +1,9 @@
 [package]
-name = "sbe_b3__umdf_mbo_sbe"
+name = "sbe_md_rust"
 version = "0.1.0"
-authors = ["sbetool"]
-description = "B3 Market Data UMDF SBE messages"
 edition = "2021"
+authors = ["pedrosfaria2"]
 
-[lib]
-name = "sbe_b3__umdf_mbo_sbe"
-path = "src/lib.rs"
+[dependencies]
+tokio = { version = "1.38.0", features = ["full"] }
+sbe_b3__umdf_mbo_sbe = { path = "sbe_b3__umdf_mbo_sbe" }
