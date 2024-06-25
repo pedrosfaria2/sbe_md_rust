@@ -4,6 +4,7 @@ use std::io::BufReader;
 use sbe_b3__umdf_mbo_sbe::message_header_codec::decoder::MessageHeaderDecoder;
 use sbe_b3__umdf_mbo_sbe::ReadBuf;
 use std::error::Error;
+use sbe_b3__umdf_mbo_sbe::message_type::MessageType;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let path = "pcap-examples/Corvil-local-cne-export-1680639597609180908-1680645600235576416.pcap";
@@ -34,8 +35,7 @@ fn process_message(message: &[u8]) {
     }
 
     let read_buf = ReadBuf::new(message);
-    let mut header_decoder = MessageHeaderDecoder::default();
-    header_decoder = header_decoder.wrap(read_buf, 0);
+    let header_decoder = MessageHeaderDecoder::default().wrap(read_buf, 0);
 
     let template_id = header_decoder.template_id();
     let block_length = header_decoder.block_length();
@@ -49,8 +49,13 @@ fn process_message(message: &[u8]) {
     println!("Schema ID: {}", schema_id);
     println!("Version: {}", version);
 
-    match template_id {
-        29278 => println!("Received message with template ID: {}", template_id),
-        _ => println!("Unknown template ID: {}", template_id),
+    // Identificando o tipo de mensagem
+    if message.len() > 8 {
+        let message_type = MessageType::from(message[8]);
+        println!("Message Type: {:?}", message_type);
+    } else {
+        println!("Message too short to decode type.");
     }
+
+    println!("Received message with template ID: {}", template_id);
 }
