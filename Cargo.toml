@@ -5,5 +5,8 @@ edition = "2021"
 authors = ["pedrosfaria2"]
 
 [dependencies]
-tokio = { version = "1.38.0", features = ["full"] }
-sbe_b3__umdf_mbo_sbe = { path = "sbe_b3__umdf_mbo_sbe" }
+tokio = { version = "1", features = ["full"] }
+tokio-util = { version = "0.6.9" }
+sbe_b3__umdf_mbo_sbe = { path = "./sbe_b3__umdf_mbo_sbe" }
+pcap-parser = "0.15"
+pcap-file = "0.10"
